@@ -16,12 +16,12 @@ class ReactNotes extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <SimpleButton />
+                <SimpleButton  customText="testButton" onPress={() => console.log('Pressed!') }/>
             </View>
         );
     }
 }
-
+// SimpleButton.defaultProps = { customText='text' };
 const styles = StyleSheet.create({
     container: {
         flex: 1,
