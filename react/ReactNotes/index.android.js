@@ -18,6 +18,10 @@ import NoteScreen from './App/Component/NoteScreen';
 
 import HomeScreen from './App/Component/HomeScreen';
 
+
+/**
+ * 导航映射的处理方法。
+ */
 var NavigationBarRouteMapper = {
     LeftButton: function(route, navigator, index, navState) {
         switch (route.name) {
@@ -28,6 +32,8 @@ var NavigationBarRouteMapper = {
                             navigator.pop()
                         } }
                         customText='Back'
+                        style={styles.navBarLeftButton}
+                        textStyle={styles.navBarButtonText}
                         />
                 )
             default:
@@ -45,6 +51,8 @@ var NavigationBarRouteMapper = {
                             })
                         } }
                         customText='Create Note'
+                        style={styles.navBarRightButton}
+                        textStyle={styles.navBarButtonText}
                         />
                 )
             default:
@@ -55,11 +63,11 @@ var NavigationBarRouteMapper = {
         switch (route.name) {
             case "createNote":
                 return (
-                    <Text>Create Note</Text>
+                    <Text style={styles.navBarTitleText}>Create Note</Text>
                 )
-                case "home":
+            case "home":
                 return (
-                    <Text>React Notes</Text>
+                    <Text style={styles.navBarTitleText}>React Notes</Text>
                 )
             default:
                 return null;
@@ -67,7 +75,12 @@ var NavigationBarRouteMapper = {
     },
 }
 class ReactNotes extends Component {
+    constructor(props){
+        super(props);
+        // StatusBarIOS.setStyle('light-content');//IOS 改变状态栏的颜色
+    }
     renderScene(route, navigator) {
+        console.log(route.name,navigator);
         switch (route.name) {
             case 'home':
                 return (
@@ -80,7 +93,7 @@ class ReactNotes extends Component {
                     //             })
                     //         } }/>
                     // </View>
-                    <HomeScreen/>
+                    <HomeScreen navigator={navigator}/>
                 );
             case 'createNote':
                 return (
@@ -102,6 +115,7 @@ class ReactNotes extends Component {
                         routeMapper={
                             NavigationBarRouteMapper
                         }
+                        style={styles.navBar}
                         />
                 }
 
@@ -130,6 +144,30 @@ const styles = StyleSheet.create({
         color: '#333333',
         marginBottom: 5,
     },
+    navBar: {
+        backgroundColor: '#5B29C1',
+        borderBottomColor: '#48209A',
+        borderBottomWidth: 1
+    },
+    navBarTitleText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: '500',
+        marginVertical: 9 // iOS
+        // marginVertical: 16 // Android
+    },
+    navBarLeftButton: {
+        paddingLeft: 10
+    },
+    navBarRightButton: {
+        paddingRight: 10
+    },
+    navBarButtonText: {
+        color: '#EEE',
+        fontSize: 16,
+        marginVertical: 10 // iOS
+        // marginVertical: 16 // Android
+    }
 });
 
 AppRegistry.registerComponent('ReactNotes', () => ReactNotes);
