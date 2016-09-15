@@ -10,7 +10,7 @@ import React, {
 class NoteList extends React.Component {
     constructor(props) {
         super(props);
-        console.log('props', props)
+        console.log('NoteList.props', props)
         this.ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         })
@@ -20,14 +20,14 @@ class NoteList extends React.Component {
         return (
             <ListView
                 dataSource={
-                    this.ds.cloneWithRows([
-                        { title: 'note 1', body: 'body 1', id: 1 },
-                        { title: 'note 2', body: 'body 2', id: 2 }
-                    ])
+                    this.ds.cloneWithRows(this.props.notes)
                 }
                 renderRow={(rowData) => {
                     return (
-                        <TouchableOpacity  onPress={() => this._onPress(rowData) }>
+                        // <TouchableOpacity  onPress={() => this._onPress(rowData) }>
+                        <TouchableOpacity  onPress={() => this.props.onSelectNote(rowData) }>
+                        
+                        
                             <View style={styles.rowStyle}>
                                 <Text style={{color: 'red'}}>
                                     {rowData.title}
@@ -49,7 +49,8 @@ class NoteList extends React.Component {
                 note: {
                     id: rowData.id,
                     title: rowData.title,
-                    body: rowData.body
+                    body: rowData.body,
+                    test:'test'
                 }
             }
         )
