@@ -1,69 +1,39 @@
-Below is a list of all available snippets and the triggers of each one. The ⇥ means the TAB key.
+# 学习RN用的例子
+
+# 书籍名称:[Packt.Getting.Started.with.React.Native.2015.12](https://www.packtpub.com/application-development/getting-started-react-native)
 
 
-Trigger
+# 开始
+*   react-native run-android  在android端运行，之后会报错（无法连接到服务端）
+*   react-native start 启动react-native 服务端,
 
-Content
+* A common issue is that the packager is not started automatically when you run react-native run-android. You can start it manually using react-native start.
 
-
-rcc→ class component skeleton 
-rccp→ class component skeleton with prop types after the class 
-rcjc→ class component skeleton without import and default export lines 
-rcfc→ class component skeleton that contains all the lifecycle methods 
-rsc→ stateless component skeleton 
-rscp→ stateless component with prop types skeleton 
-con→ class default constructor with props 
-conc→ class default constructor with props and context 
-cwm→ componentWillMount method 
-cdm→ componentDidMount method 
-cwr→ componentWillReceiveProps method 
-scu→ shouldComponentUpdate method 
-cwup→ componentWillUpdate method 
-cdup→ componentDidUpdate method 
-cwun→ componentWillUnmount method 
-ren→ render method 
-sst→ this.setState with object as parameter 
-ssf→ this.setState with function as parameter 
-props→ this.props 
-state→ this.state 
-bnd→ binds the this of method inside the constructor 
-
-The following table lists all the snippets that can be used for prop types.
-Every snippet regarding prop types begins with pt so it's easy to group it all together and explore all the available options.
-On top of that each prop type snippets has one equivalent when we need to declare that this property is also required.
-For example pta creates the PropTypes.array and ptar creates the PropTypes.array.isRequired
+# 手机摇动可以出现设置菜单
+* dev settings 可以设置手机reload的服务端。
+* debug js 可以在pc端打开浏览器进行调试
 
 
-Trigger
-
-Content
 
 
-pta→ PropTypes.array, 
-ptar→ PropTypes.array.isRequired, 
-ptb→ PropTypes.bool, 
-ptbr→ PropTypes.bool.isRequired, 
-ptf→ PropTypes.func, 
-ptfr→ PropTypes.func.isRequired, 
-ptn→ PropTypes.number, 
-ptnr→ PropTypes.number.isRequired, 
-pto→ PropTypes.object., 
-ptor→ PropTypes.object.isRequired, 
-pts→ PropTypes.string, 
-ptsr→ PropTypes.string.isRequired, 
-ptnd→ PropTypes.node, 
-ptndr→ PropTypes.node.isRequired, 
-ptel→ PropTypes.element, 
-ptelr→ PropTypes.element.isRequired, 
-pti→ PropTypes.instanceOf(ClassName), 
-ptir→ PropTypes.instanceOf(ClassName).isRequired, 
-pte→ PropTypes.oneOf(['News', 'Photos']), 
-pter→ PropTypes.oneOf(['News', 'Photos']).isRequired, 
-ptet→ PropTypes.oneOfType([PropTypes.string, PropTypes.number]), 
-ptetr→ PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, 
-ptao→ PropTypes.arrayOf(PropTypes.number), 
-ptaor→ PropTypes.arrayOf(PropTypes.number).isRequired, 
-ptoo→ PropTypes.objectOf(PropTypes.number), 
-ptoor→ PropTypes.objectOf(PropTypes.number).isRequired, 
-ptsh→ PropTypes.shape({color: PropTypes.string, fontSize: PropTypes.number}), 
-ptshr→ PropTypes.shape({color: PropTypes.string, fontSize: PropTypes.number}).isRequired, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

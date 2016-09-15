@@ -4,6 +4,8 @@
      ref='title'  给输入框命名，使其可以在js中访问到（refs）
      
      textAlignVertical="top" 设置文本的垂直对齐方式
+     
+     this.refs.body 访问ref="body"的控件
 */
 
 
@@ -30,7 +32,7 @@ export default class NoteScreen extends React.Component {
           <TextInput
             autoFocus={true}
             autoCapitalize="sentences"
-            placeholder="Untitled"
+            placeholder="请输入标题"
             style={[styles.textInput, styles.title]}
             onEndEditing={(text) => {this.refs.body.focus()}}
             underlineColorAndroid="transparent"
@@ -41,7 +43,7 @@ export default class NoteScreen extends React.Component {
           <TextInput
             ref="body"
             multiline={true}
-            placeholder="Start typing"
+            placeholder="输入文字"
             style={[styles.textInput, styles.body]}
             textAlignVertical="top"
             underlineColorAndroid="transparent"

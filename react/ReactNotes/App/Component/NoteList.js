@@ -3,7 +3,8 @@ import React, {
     Text,
     View,
     ListView,
-    TouchableHighlight
+    TouchableHighlight,
+    TouchableOpacity
 } from 'react-native';
 
 class NoteList extends React.Component {
@@ -26,11 +27,13 @@ class NoteList extends React.Component {
                 }
                 renderRow={(rowData) => {
                     return (
-                        <TouchableHighlight onPress={() => this._onPress(rowData) }>
-                            <Text>
-                                {rowData.title}
-                            </Text>
-                        </TouchableHighlight>
+                        <TouchableOpacity  onPress={() => this._onPress(rowData) }>
+                            <View style={styles.rowStyle}>
+                                <Text style={{color: 'red'}}>
+                                    {rowData.title}
+                                </Text>
+                           </View>
+                        </TouchableOpacity >
                     )
                 } }
                 >
@@ -52,5 +55,13 @@ class NoteList extends React.Component {
         )
     }
 }
+var styles = StyleSheet.create({
 
+    rowStyle: {
+        paddingVertical: 20,
+        paddingLeft: 16,
+        borderBottomColor: '#E0E0E0',
+        borderBottomWidth: 1
+    }
+});
 export default NoteList;

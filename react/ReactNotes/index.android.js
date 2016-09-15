@@ -20,10 +20,10 @@ import HomeScreen from './App/Component/HomeScreen';
 
 
 /**
- * 导航映射的处理方法。
+ * 导航映射的处理方法。(http://facebook.github.io/react-native/docs/navigator.html#navigation-bar)
  */
 var NavigationBarRouteMapper = {
-    LeftButton: function(route, navigator, index, navState) {
+    LeftButton: function (route, navigator, index, navState) {
         switch (route.name) {
             case "createNote":
                 return (
@@ -40,7 +40,7 @@ var NavigationBarRouteMapper = {
                 return null;
         }
     },
-    RightButton: function(route, navigator, index, navState) {
+    RightButton: function (route, navigator, index, navState) {
         switch (route.name) {
             case "home":
                 return (
@@ -59,7 +59,7 @@ var NavigationBarRouteMapper = {
                 return null;
         }
     },
-    Title: function(route, navigator, index, navState) {
+    Title: function (route, navigator, index, navState) {
         switch (route.name) {
             case "createNote":
                 return (
@@ -75,12 +75,18 @@ var NavigationBarRouteMapper = {
     },
 }
 class ReactNotes extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         // StatusBarIOS.setStyle('light-content');//IOS 改变状态栏的颜色
     }
     renderScene(route, navigator) {
-        console.log(route.name,navigator);
+        /**
+         * http://facebook.github.io/react-native/docs/navigator.html#renderscene
+         * Required function which renders the scene for a given route. 
+         * Will be invoked with the route and the navigator object.
+         * 
+         *  */
+        console.log(route.name, navigator);
         switch (route.name) {
             case 'home':
                 return (
