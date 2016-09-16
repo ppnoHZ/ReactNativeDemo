@@ -14,8 +14,17 @@
 * debug js 可以在pc端打开浏览器进行调试
 
 
+# [打包](http://facebook.github.io/react-native/docs/signed-apk-android.html)
 
+  1,  Place the my-release-key.keystore file under the android/app directory in your project folder.
+  2,.gradle/gradle.properties
 
+```javascript
+    MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+    MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+    MYAPP_RELEASE_STORE_PASSWORD=*****
+    MYAPP_RELEASE_KEY_PASSWORD=*****
+```
 
 
 

@@ -26,12 +26,18 @@ export default class HomeScreen extends React.Component {
                 :
                 (
                     <View style={styles.container}>
-                      <Text style={styles.noNotesText}>You haven`t created any notes!</Text>
+                      <Text style={styles.noNotesText}>你还没有创建过，请先创建</Text>
                         <SimpleButton
-                            onPress={()=>this.props.navgator.push({
-                                name:'createNote'
+                            onPress={()=>this.props.navigator.push({
+                                name:'createNote',
+                                note: {
+                                    id: new Date().getTime(),
+                                    title: '',
+                                    body: '',
+                                    isSaved: false
+                                }
                             })}
-                            customText="Create Note"
+                            customText="创建"
                             style={styles.simpleButton}
                             textStyle={styles.simpleButtonText}
                         />

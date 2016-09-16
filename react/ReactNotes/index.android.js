@@ -27,6 +27,7 @@ var _= require('underscore');
 var NavigationBarRouteMapper = {
     LeftButton: function (route, navigator, index, navState) {
         switch (route.name) {
+            case'camera':
             case "createNote":
                 return (
                     <SimpleButton
@@ -38,6 +39,7 @@ var NavigationBarRouteMapper = {
                         textStyle={styles.navBarButtonText}
                         />
                 )
+               
             default:
                 return null;
         }
@@ -92,6 +94,10 @@ var NavigationBarRouteMapper = {
                 return (
                     <Text style={styles.navBarTitleText}>React Notes</Text>
                 )
+            case 'camera':
+                return (
+                    <Text style={styles.navBarTitleText}>Take Picture</Text>
+                );
             default:
                 return null;
         }
@@ -164,13 +170,17 @@ class ReactNotes extends Component {
         this.setState({notes:newNotes});
         this.saveNotes(newNotes);        
     }
-    
+     componentWillMount() {
+        navigator.geolocation.clearWatch(this.watchID);
+    }
     tractLoction(){
         navigator.geolocation.getCurrentPosition(
                 (initialPostion)=>this.setState({initialPostion}),
                 (error)=>alert(error.message)
             );
-        // this.watchID=navigator.getCurrentPosition.watch
+        this.watchID=navigator.geolocation.watchPosition((lastPostion)=>{
+            this.setState({lastPostion});
+        });
     }
     renderScene(route, navigator) {
         /**
@@ -201,9 +211,12 @@ class ReactNotes extends Component {
                     
                     
                 )
-
+            
         }
     }
+    
+   
+    
     render() {
         return (
             // <View style={styles.container}>
