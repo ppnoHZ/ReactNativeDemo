@@ -21,11 +21,11 @@ export default class NoteScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log('notescreen', props);
-    console.log('this.props', this.props);
-    console.log('this.props.note', this.props.note);
+    // console.log('notescreen', props);
+    // console.log('this.props', this.props);
+    // console.log('this.props.note', this.props.note);
 
-    this.state = { note: this.props.note };
+    this.state = { note: Object.assign({}, props.note)};
   }
 
   updateNote(title, body) {
@@ -33,6 +33,7 @@ export default class NoteScreen extends React.Component {
       title: title,
       body: body
     });
+    console.log('updateNote',note);
     this.props.onChangeNote(note);
     this.setState(note);
   }

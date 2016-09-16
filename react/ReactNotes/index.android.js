@@ -9,7 +9,8 @@ import React, {
     StyleSheet,
     Text,
     View,
-    Navigator
+    Navigator,
+    AsyncStorage    
 } from 'react-native';
 // 导入外部组件 注意：from的是 类名不是文件名，没有后缀。
 import SimpleButton from './App/Component/SimpleButton';
@@ -48,7 +49,12 @@ var NavigationBarRouteMapper = {
                     <SimpleButton
                         onPress={() => {
                             navigator.push({
-                                name: 'createNote'
+                                name: 'createNote',
+                                note:{
+                                    id:new Date().getTime(),
+                                    title:'',
+                                    body:''
+                                }
                             })
                         } }
                         customText='Create Note'
@@ -64,7 +70,7 @@ var NavigationBarRouteMapper = {
         switch (route.name) {
             case "createNote":
                 return (
-                    <Text style={styles.navBarTitleText}>Create Note</Text>
+                    <Text style={styles.navBarTitleText}>{route.note?route.note.title: 'Create Note'}</Text>
                 )
             case "home":
                 return (
@@ -90,17 +96,45 @@ class ReactNotes extends Component {
         
         this.state = {
                     notes: {
-                        1: {title: "Note 1", body: "body", id: 1},
+                        1: {title: "Note", body: "body", id: 1},
                         2: {title: "Note 2", body: "body", id: 2}
                     }
         };
+        
+        
+        this.loadNotes();
         console.log('ReactNotes.state',this.state);
         
+    }
+    /**
+     * 使用本地存储，存储列表
+     */
+    async saveNotes(notes){
+        try {
+            await AsyncStorage.setItem('@ReactNotes:notes',JSON.stringify(notes));
+        } catch (error) {
+            console.log('AsyncStorage error',error.message);
+        }
+    }
+    
+    async loadNotes(){
+        try {
+            var notes=await AsyncStorage.getItem("@ReactNotes:notes");
+            if(notes!==null)
+            {
+                this.setState({notes:JSON.parse(notes)});
+            }
+        } catch (error) {
+            console.log('AsyncStorage error',error.message);
+        }
     }
     updateNote(note) {
         var newNotes = Object.assign({}, this.state.notes);
         newNotes[note.id] = note;
         this.setState({notes:newNotes});
+        
+        this.saveNotes(newNotes);
+        
     }
     renderScene(route, navigator) {
         /**

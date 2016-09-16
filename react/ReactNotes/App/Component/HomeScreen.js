@@ -15,26 +15,30 @@ import SimpleButton from './SimpleButton';
 export default class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
+        console.log("notes.length ",this.props.notes.length);
     }
     
     render () {
         return (
             <View style={styles.container}>
-            
+            {this.props.notes.length > 0 ?
                 <NoteList onSelectNote={this.props.onSelectNote} notes={this.props.notes} navigator={this.props.navigator}/>
-            
-                <Text 
-                    style={styles.noNotesText}
-                >You haven`t created any notes!</Text>
-                <SimpleButton
-                    onPress={()=>this.props.navgator.push({
-                        name:'createNote'
-                    })}
-                    customText="Create Note"
-                    style={styles.simpleButton}
-                    textStyle={styles.simpleButtonText}
+                :
+                (
+                    <View style={styles.container}>
+                      <Text style={styles.noNotesText}>You haven`t created any notes!</Text>
+                        <SimpleButton
+                            onPress={()=>this.props.navgator.push({
+                                name:'createNote'
+                            })}
+                            customText="Create Note"
+                            style={styles.simpleButton}
+                            textStyle={styles.simpleButtonText}
+                        />
+                      </View>
+                )}
+
                 
-                />
             
              </View>
         );
