@@ -33,7 +33,7 @@ var NavigationBarRouteMapper = {
                         onPress={() => {
                             navigator.pop()
                         } }
-                        customText='Back'
+                        customText='返回'
                         style={styles.navBarLeftButton}
                         textStyle={styles.navBarButtonText}
                         />
@@ -57,11 +57,27 @@ var NavigationBarRouteMapper = {
                                 }
                             })
                         } }
-                        customText='Create Note'
+                        customText='新建'
                         style={styles.navBarRightButton}
                         textStyle={styles.navBarButtonText}
                         />
                 )
+             case 'createNote':
+                if(route.note.isSaved){
+                    return (<SimpleButton onPress={()=>{
+                                    navigator.props.onDeleteNote(route.note);
+                                    navigator.pop();
+                                }
+                            }
+                            customText="删除"
+                            style={styles.navBarRightButton}
+                            textStyle={styles.navBarButtonText}
+                            
+                             />)
+                }else{
+                    return null;
+                }
+             
             default:
                 return null;
         }
@@ -116,7 +132,9 @@ class ReactNotes extends Component {
             console.log('AsyncStorage error',error.message);
         }
     }
-    
+    /**
+     * 使用本地存储，读取列表
+     */
     async loadNotes(){
         try {
             var notes=await AsyncStorage.getItem("@ReactNotes:notes");
@@ -130,11 +148,29 @@ class ReactNotes extends Component {
     }
     updateNote(note) {
         var newNotes = Object.assign({}, this.state.notes);
+        note.isSaved=true;
         newNotes[note.id] = note;
         this.setState({notes:newNotes});
         
         this.saveNotes(newNotes);
         
+    }
+    /**
+     * 删除note
+     */
+    deleteNote(note){
+        var newNotes = Object.assign({}, this.state.notes);
+        delete newNotes[note.id];
+        this.setState({notes:newNotes});
+        this.saveNotes(newNotes);        
+    }
+    
+    tractLoction(){
+        navigator.geolocation.getCurrentPosition(
+                (initialPostion)=>this.setState({initialPostion}),
+                (error)=>alert(error.message)
+            );
+        // this.watchID=navigator.getCurrentPosition.watch
     }
     renderScene(route, navigator) {
         /**
@@ -184,7 +220,7 @@ class ReactNotes extends Component {
                         style={styles.navBar}
                         />
                 }
-
+                onDeleteNote={(note)=>{this.deleteNote(note)}}
                 >
             </Navigator>
         );
